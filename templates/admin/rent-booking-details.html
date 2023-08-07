@@ -1,0 +1,87 @@
+{% extends 'admin/home.html' %}
+{% block title %}
+- Rent Car Booking Details
+{% endblock %}
+
+{% block content %}
+  
+    <div class="container">
+        <div class="row mt-5" >
+            <div class="col">
+                <nav aria-label="breadcrumb"  class="bg-light rounded-3 p-3 mb-4">
+                    <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="{% url 'adminhome' %}" class="text-decoration-none">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Booking Details</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <div class="container mt-2">
+          <div class="table-responsive text-center">
+            <table class="table table-hover text-wrap bg-light text-center  " >
+              <thead>
+                <tr>
+                  <th scope="col">Cus Id</th>
+                  <th scope="col">Full Name</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Car Brand</th>
+                  <th scope="col">Car Model</th>
+                  <th scope="col">Pick-up Date</th>
+                  <th scope="col">Drop-off Date</th>
+                  <th scope="col">Total Price</th>
+                  <th scope="col">Payment Status</th>
+                  <th scope="col">Image</th>
+                </tr>
+              </thead>
+              <tbody>
+               
+
+                {% for detail in details  %}
+                  {% for record in detail.rent_car.all %}
+
+
+                  <tr>
+                    <th scope="">10{{ detail.user.id }}{{ record.id }}</th>
+                    <td class="text-capitalize">
+                      {{detail.user.first_name}} {{detail.user.last_name}}
+                    </td>
+                    <td>
+                      {{ detail.user.email }}
+                    </td>
+                      <td>
+                        {{record.rental_car.car_model.brands.brand}}
+                      </td>
+                      <td>
+                        {{record.rental_car.car_model.models}}
+                      </td>
+                      <td>
+                        {{record.pick_up}}
+                      </td>
+                      <td>
+                        {{record.drop_off}}
+                      </td> 
+                      <td>
+                        {{record.total_price}}
+                      </td>
+                      <td>
+                        {% if detail.payment_status %}
+                            <span class="badge text-bg-success"> Payment Accepted </span>
+                        {% else %}
+                            <span class="badge text-bg-danger"> Payment Pending </span>
+                        {% endif %}
+                      </td>
+                      <td>
+                        <img src="{{record.rental_car.photo.url}}" class="rounded" width="100" alt="Image">
+                      </td>
+                      
+                  </tr>
+                  {% endfor %}
+                {% endfor %}
+              </tbody>
+          </table>
+          </div>
+            
+        </div>
+
+    </div>
+{% endblock %}

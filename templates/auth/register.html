@@ -1,0 +1,86 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block title %}
+Register
+{% endblock %}
+
+{% block content %}
+<div class="container" >
+    <div class="row mt-5" >
+        <div class="col">
+            <nav aria-label="breadcrumb"  class="bg-light rounded-3 p-3 ">
+                <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a href="{% url 'index' %}" class="text-decoration-none">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Register</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    
+    {% include 'include/message.html' %}
+
+    <div class="row" style="margin-top: 2rem;">
+        <div class="container-fluid">
+            <div class="d-md-flex h-md-100 align-items-center">
+                <!-- First Half -->
+                <div class="col-md-6 p-0  h-md-100 loginarea bg-greyish">
+                    <div class="d-md-flex align-items-center h-md-100 p-5 justify-content-center">
+                        <div class="logoarea pt-5 pb-5">
+                            <form action="{% url 'signup' %}" method="post" name="form" onsubmit="return validateRegister()">
+                                {% csrf_token %}
+                                <div class="mb-1">
+                                    <div class="row">
+                                        <div class="col-6 col-md-6 col-sm-6">
+                                            <input type="text" name="firstname" id="firstname" class="form-control  fw-bold" placeholder="First Name" >
+                                            <p id="firstname_error"></p>
+                                        </div>
+                                        <div class="col-6 col-md-6 col-sm-6">
+                                            <input type="text" name="lastname" id="lastname" class="form-control  fw-bold" placeholder="Last Name" >
+                                            <p id="lastname_error"></p>        
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <input type="email" name="email" id="email" class="form-control  fw-bold" placeholder="Email" >
+                                    <p id="email_error"></p>
+                                </div>
+                                <div class="mb-3">
+                                    <input type="text" name="username" id="username" class="form-control  fw-bold" placeholder="User Name" >
+                                    <p id="username_error"></p>
+                                </div>
+                                <div class="mb-3">
+                                    <input type="password" name="password" id="password" class="form-control   fw-bold" placeholder="Password" >
+                                    <p id="password_error"></p>
+                                </div>
+                                <div class="mb-3">
+                                    <input type="password" name="confirm_password" id="confirm_password" class="form-control   fw-bold" placeholder="Confirm Password" >
+                                    <p id="confirm_password_error"></p>
+                                </div>
+                                <div class="mb-2 d-grid">
+                                    <button type="submit" class="btn btn-primary justify-content-center" value="submit">Register</button>
+                                </div>
+                            </form>
+                            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-1 border-bottom"></div>
+                            <div class="mt-2">
+                                <p class="text-center text-wrap ">Hava an account ? <span><a href="{% url 'login' %}" class="text-decoration-none">Login</a></span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Second half -->
+                <div class="col-md-6 p-0  h-md-100 bg-box">
+                    <div class="text-white d-md-flex align-items-center h-100 p-5 text-center justify-content-center">
+                        <div class="logoarea pt-5 pb-5">
+                            <img src="{% static 'images/Sign up-rafiki.png' %}" alt="Logo" class="img-fluid  "  width="500" >
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'javascript/register.js' %}"></script>
+
+{% endblock %}

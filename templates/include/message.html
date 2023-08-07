@@ -1,0 +1,11 @@
+{% load static %}
+
+{% if messages %}
+        {% for message in messages %}
+        <!-- <link rel="stylesheet" href="{% static 'style/notification' %}"> -->
+        <div  class="notification "  >
+            <strong>{{message}}</strong>
+            <span class="notification_progress"></span>
+        </div>
+        {% endfor %}
+{% endif %}

@@ -1,0 +1,141 @@
+{% extends 'customer/home.html' %}
+{% load static %}
+{% block title %}
+- Profile
+{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row mt-5" >
+            <div class="col">
+                <nav aria-label="breadcrumb"  class="bg-light rounded-3 p-3 mb-4">
+                    <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="{% url 'home' %}" class="text-decoration-none">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Profile</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+
+        {% include 'include/message.html' %}
+        
+        <!-- Profile -->
+        <section>
+            <div class="row">
+            <div class="col-lg-4">
+                <div class="card mb-4">
+                <div class="card-body text-center">
+                    {% if customer.photo %}
+                    <img src="{{ customer.photo.url }}" alt="avatar"
+                    class="rounded-circle img-fluid" style="width: 150px;">
+                    {% else %}
+                    <img src="{% static 'images/user.png' %}" alt="avatar"
+                    class="rounded-circle img-fluid" style="width: 150px;">
+                    {% endif %}
+                    <h5 class="my-3 text-center">{{cust.first_name}} {{ cust.last_name }}</h5>
+                    <p class="text-muted mb-1">{{cust.email}}</p>
+                    <p class="text-muted mb-4">{{customer.address}}</p>
+                    <div class="d-flex justify-content-center mb-2  ">
+                    <div>
+                    <a href="{% url 'edit' %}" class="btn btn-outline-primary">Edit</a>
+                    <a href="{% url 'changepassword' %}" class="btn btn-outline-secondary">Change Password</a></div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="card mb-4">
+                <div class="card-body">
+                    <div class="row">
+                    <div class="col-sm-3">
+                        <p class="mb-0">Full Name</p>
+                    </div>
+                    <div class="col-sm-9">
+                        <p class="text-muted mb-0">{{cust.first_name}} {{ cust.last_name }}</p>
+                    </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                    <div class="col-sm-3">
+                        <p class="mb-0">Email</p>
+                    </div>
+                    <div class="col-sm-9">
+                        <p class="text-muted mb-0">{{cust.email}}</p>
+                    </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <p class="mb-0">User Name</p>
+                        </div>
+                        <div class="col-sm-9">
+                            <p class="text-muted mb-0">{{ cust.username }}</p>
+                        </div>
+                        </div>
+                        <hr>
+                    <div class="row">
+                    <div class="col-sm-3">
+                        <p class="mb-0">Phone</p>
+                    </div>
+                    <div class="col-sm-9">
+                        {% if customer %}
+                        <p class="text-muted mb-0">{{ customer.phone }}</p>
+                        {% endif %}
+                    </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <p class="mb-0">Gender</p>
+                        </div>
+                        <div class="col-sm-9">
+                            {% if customer %}
+                            <p class="text-muted mb-0">{{ customer.gender }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <p class="mb-0">Address</p>
+                        </div>
+                        <div class="col-sm-9">
+                            {% if customer %}
+                            <p class="text-muted mb-0">{{ customer.address }}</p>
+                            {% endif %} 
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <p class="mb-0">City</p>
+                        </div>
+                        <div class="col-sm-9">
+                            {% if customer %}
+                            <p class="text-muted mb-0">{{ customer.city }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <p class="mb-0">State</p>
+                        </div>
+                        <div class="col-sm-9">
+                            {% if customer %}
+                            <p class="text-muted mb-0">{{ customer.state }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            </div>
+        </section>
+
+    </div>
+
+
+
+{% endblock %}

@@ -1,0 +1,143 @@
+{% extends 'admin/home.html' %}
+{% block title %}
+-Car Brand and Models
+{% endblock %}
+
+{% block content %}
+
+{% include 'include/message.html' %}
+
+
+    <div class="container">
+        <div class="row mt-5" >
+            <div class="col">
+                <nav aria-label="breadcrumb"  class="bg-light rounded-3 p-3 mb-4">
+                    <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="{% url 'adminhome' %}" class="text-decoration-none">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"> Add Car details</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        
+        <section>
+            <div class="row mt-2">
+                <div class="d-flex justify-content-end">
+                    <a href="{% url 'carbrand' %}" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#brandModal">Add Brand</a>
+                </div>
+            </div>
+            <div class="container mt-5">
+                <div class="table-responsive">
+                    <table class="table table-hover bg-light text-wrap text-center">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th>Car Brand</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for brand in brand %}
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>{{brand.brand}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- modal  -->
+            <div class="modal fade " id="brandModal" tabindex="-1" aria-labelledby="brandModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered ">
+                  <div class="modal-content bg-dark text-light">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="brandModalLabel">Add Brand Name</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <form action="{% url 'addbrand' %}" method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <input type="text" name="brand" id="" class="form-control fw-bold" placeholder="Brand" required>
+                        </div>
+                        <div class="text-end">
+                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-outline-primary">Submit</button>
+                        </div>
+                      </form>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+        </section>
+
+        <section>
+            <div class="row mt-4">
+                <div class="d-flex justify-content-end">
+                    <a href="{% url 'carbrand' %}" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modelModal">Add Modal</a>
+                </div>
+            </div>
+            <div class="container mt-5">
+                <div class="table-responsive">
+                    <table class="table table-hover bg-light text-wrap text-center">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th>Car Brand</th>
+                                <th>Car Model</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for model in models %}
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>{{model.brands.brand}}</td>
+                                <td>{{model.models}}</td>
+                                <td>
+                                    <a href="{% url 'deletemodel' model.id %}" class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i> Delete Car Models</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- modal  -->
+            <div class="modal fade " id="modelModal" tabindex="-1" aria-labelledby="brandModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered ">
+                  <div class="modal-content bg-dark text-light">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="brandModalLabel">Add Brand Name</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <form action="{% url 'addmodel' %}" method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <select name="brand" id=""class="form-select" aria-label="select example">
+                                <option selected disabled>Select Car Brand</option>
+                                {% for brands in brand %}
+                                <option value="{{ brands.id }}">{{ brands.brand }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" name="model" id="" class="form-control fw-bold" placeholder="Models" required>
+                        </div>
+                        <div class="text-end">
+                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-outline-primary">Submit</button>
+                        </div>
+                      </form>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+        </section>
+
+    </div>
+
+{% endblock %}

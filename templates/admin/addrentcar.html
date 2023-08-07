@@ -1,0 +1,97 @@
+{% extends 'admin/home.html' %}
+{% block title %}
+-Add Rental Cars
+{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row mt-5" >
+            <div class="col">
+                <nav aria-label="breadcrumb"  class="bg-light rounded-3 p-3 mb-4">
+                    <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="{% url 'adminhome' %}" class="text-decoration-none">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'rentalcars' %}" class="text-decoration-none">Rental Cars</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"> Add Rental Cars</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+      
+        <div class="row">
+            <div class="container-fluid mt-3  ">
+                <div class="col-lg-12 col-12 col-md-12 ">
+                    <div class="justify-content-center align-items-center">
+                        <form action="{% url 'addrent' %} " method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <div class="row">
+                                    <div class="col-6 col-sm-6 col-md-6">
+                                        
+                                        <div class="dropdown show">
+                                            <a class="btn btn-outline-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                Select Car Brand
+                                            </a>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <li>
+                                                    {% for brands in brand %} 
+                                                    <a class="dropdown-item" href="{% url 'modelfilter' brands.id %}">{{brands.brand}}</a>
+                                                    {% endfor %}
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-sm-6 col-md-6">
+                                        <select class="form-select" name="model" aria-label="select example">
+                                            <option selected disabled>Select Car Model</option>
+                                            {% for model in models %}
+                                                <option name="model" value="{{model.id}}">{{model.models}}</option>
+                                            {% endfor %}
+                                          
+                                        </select>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="row">
+                                    <div class="col-6 col-sm-6 col-md-6">
+                                        <select class="form-select" name="fuel" aria-label="select example">
+                                            <option selected disabled>Select Car Fuel</option>
+                                            <option name="fuel" value="Petrol">Petrol</option>
+                                            <option name="fuel" value="Diesel">Diesel</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-6 col-sm-6 col-md-6">
+                                        <input type="tel" name="kilometers" id="kilometers" class="form-control  fw-bold" placeholder="Kilometers" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="row">
+                                    <div class="col-6 col-sm-6 col-md-6">
+                                <input type="text" name="description" id="description" class="form-control fw-bold" placeholder="Description" required>
+                                        
+                                    </div>
+                                    <div class="col-6 col-sm-6 col-md-6">
+                                        <input type="tel" name="price" id="price" class="form-control  fw-bold" placeholder="Price" required>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <input type="file" name="photo" id="image" accept="image/">
+                            </div>
+                            <div class="mb-2">
+                                <a href="{% url 'rentalcars' %}" class="btn btn-outline-danger">Cancel</a>
+                                <button type="submit" class="btn btn-primary justify-content-center">Submit</button>
+                            </div>
+                        </form> 
+                    </div>
+                </div> 
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

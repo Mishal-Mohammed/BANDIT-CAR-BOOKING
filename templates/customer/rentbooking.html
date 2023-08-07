@@ -1,0 +1,89 @@
+{% extends 'customer/home.html' %}
+{% load static %}
+{% block title %}
+- Rental Cars
+{% endblock %}
+
+{% block content %}
+
+  <div class="container">
+      <div class="row mt-5" >
+          <div class="col">
+              <nav aria-label="breadcrumb"  class="bg-light rounded-3 p-3 mb-4">
+                  <ol class="breadcrumb mb-0">
+                  <li class="breadcrumb-item"><a href="{% url 'home' %}" class="text-decoration-none">Home</a></li>
+                  <li class="breadcrumb-item"><a href="{% url 'carrental' %}" class="text-decoration-none">Rent Car</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Car Booking</li>
+                  </ol>
+              </nav>
+          </div>
+      </div>
+      <section>
+        <div class="row">
+            <div class="container-fluid mt-3  ">
+                <div class="col-lg-12 col-12 col-md-12 ">
+                    <div class="justify-content-center align-items-center">
+                        <form action="{% url 'rentbook' book.id  %} " method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            
+                            <div class="mb-3">
+                                <div class="row">
+                                    <div class="col-4 col-sm-4 col-md-4">
+                                        <label class="fw-bold" for="brand">Car Brand</label>
+                                        <input type="text" name="brand" id="brand" value="{{book.car_model.brands.brand}}" class="form-control fw-bold" placeholder="Car Company Name" disabled>
+                                    </div>
+                                    <div class="col-4 col-sm-4 col-md-4">
+                                        <label class="fw-bold" for="model">Car Model</label>
+                                        <input type="text" name="model" id="model" value="{{ book.car_model.models }}" class="form-control  fw-bold" placeholder="Car Model" disabled>
+                                    </div>
+                                    <div class="col-4 col-sm-4 col-md-4">
+                                        <label class="fw-bold" for="fuel">Fuel</label>
+                                        <input type="text" name="fuel" id="fuel" value="{{ book.fuel }}" class="form-control  fw-bold" placeholder="Fuel" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="row">
+                                    <div class="col-4 col-sm-4 col-md-4">
+                                        <label class="fw-bold" for="phone">Mobile Number</label>
+                                        <input type="tel" name="phone" id="phone" value="{{ customer.phone }}" class="form-control fw-bold" placeholder="Mobile Number" disabled>
+                                    </div>
+                                    <div class="col-4 col-sm-4 col-md-4">
+                                        <label for="" class="fw-bold">Address</label>
+                                        <input type="text" name="address" id="address" value="{{ customer.address }}, {{ customer.city }}, {{ customer.state }}" class="form-control  fw-bold" placeholder="Address" disabled>
+                                    </div>
+                                    <div class="col-4 col-sm-4 col-md-4">
+                                        <label for="" class="fw-bold">Price</label>
+                                        <input type="text" name="Price" id="Price" value="{{ book.price }}" class="form-control  fw-bold" placeholder="Price" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="row">
+                                    <div class="col-6 col-sm-6 col-md-6">
+                                        <label class="fw-bold" for="pick_up">Choose your pick-up date </label>
+                                        <input type="date" name="pick_up" id="pick_up" class="form-control fw-bold"  required>
+                                        
+                                    </div>
+                                    <div class="col-6 col-sm-6 col-md-6">
+                                        <label class="fw-bold" for="drop_off">Choose your drop-off date </label>
+                                        <input type="date" name="drop_off" id="drop_off" class="form-control  fw-bold" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-2">
+                                <a href="{% url 'carrental' %}" class="btn btn-outline-danger">Cancel</a>
+                                <button type="submit" class="btn btn-primary justify-content-center">Submit</button>
+                            </div>
+                        </form> 
+                    </div>
+                </div> 
+            </div>
+        </div>
+      </section>
+
+  </div>
+
+
+
+{% endblock %}

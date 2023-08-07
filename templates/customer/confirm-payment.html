@@ -1,0 +1,191 @@
+{% extends 'customer/home.html' %}
+{% load static %}
+{% block title %}
+-  Confirm Payment
+{% endblock %}
+
+{% block content %}
+
+  <div class="container mt-5">
+      <section>
+          <!-- <form action="" method="post">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <p class="mb-0">Full Name</p>
+                        </div>
+                        <div class="col-sm-3">
+                            <input type="text" name="fullname" id="" value="" placeholder="Full Name" disabled>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </form> -->
+          <div class="row">
+            <div class="col-lg-6">
+                <div class="card mb-5">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                Full Name
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-dark mb-0 text-capitalize ">
+                                    {{ customer.c_user.first_name }} {{ customer.c_user.last_name }}
+                                </p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                Email
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-dark mb-0">
+                                    {{ customer.c_user.email }}
+                                </p> 
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                Mobile Number
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-dark mb-0">
+                                    {{ customer.phone }}
+                                </p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                Address
+                            </div>
+                            <div class="col-sm-9 text-capitalize">
+                                <p class="text-dark mb-0">
+                                    {{ customer.address }}
+                                </p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                City
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-dark mb-0">
+                                    {{ customer.city }}
+                                </p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                State
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-dark mb-0">
+                                    {{ customer.state }}
+                                </p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                Car Brand 
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-dark mb-0">
+                                    {{ rent_car.rental_car.car_model.brands.brand }}
+                                </p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                Car Model
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-dark mb-0">
+                                    Mishal Mohammed
+                                </p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                Driving Licences
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-dark mb-0">
+                                    Mishal Mohammed
+                                </p>
+                            </div>
+                        </div>
+                        <!-- <hr> -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card mb-5">
+                    <img src="data:image/jpeg;base64,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" class="img img-fluid" width="100%" height="500px" alt="Card Image">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-3">
+                               <p class="text-dark">
+                                Pick-Up Date 
+                               </p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-dark">
+                                    98-9-9895
+                                </p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                               <p class="text-dark">
+                                Dorp-Off Date 
+                               </p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-dark">
+                                    98-9-9895
+                                </p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                               <p class="text-dark">
+                                Total Price
+                               </p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-dark">
+                                    985 INR
+                                </p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="mb-3  text-center">
+
+                            <a href="" class="btn btn-outline-danger">Cancel Payment</a>
+                            <a href="">
+                                <button type="submit" class="btn btn-success">Submit</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+      </section>
+
+  </div>
+
+
+
+{% endblock %}

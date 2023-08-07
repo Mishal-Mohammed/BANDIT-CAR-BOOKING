@@ -1,0 +1,80 @@
+{% extends 'admin/home.html' %}
+{% block title %}
+- Booking Details
+{% endblock %}
+
+{% block content %}
+  
+    <div class="container">
+        <div class="row mt-5" >
+            <div class="col">
+                <nav aria-label="breadcrumb"  class="bg-light rounded-3 p-3 mb-4">
+                    <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="{% url 'adminhome' %}" class="text-decoration-none">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Booking Details</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <div class="container mt-2">
+          <div class="table-responsive">
+            <table class="table table-hover text-wrap bg-light text-center  " >
+              <thead>
+                <tr>
+                  <th scope="col">Cus Id</th>
+                  <th scope="col">Full Name</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Car Brand</th>
+                  <th scope="col">Car Model</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Booking Date</th>
+                  <th scope="col">Confirm Date</th>
+                  <th scope="col">Image</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                {% for detail in details  %}
+                  {% for record in detail.sales_Car.all %}
+
+                  <tr>
+                    <th scope="">10{{ detail.user.id }}{{record.id}}</th>
+                    <td class="text-capitalize">
+                      {{detail.user.first_name}} {{detail.user.last_name}}
+                    </td>
+                    <td>
+                      {{ detail.user.email }}
+                    </td>
+                      <td>
+                        {{record.car.car_model.brands.brand}}
+                      </td>
+                      <td>
+                        {{record.car.car_model.models}}
+                      </td>
+                      <td>
+                        {{record.car.price}}
+                      </td>
+                      <td>
+                        {{record.booking_date}}
+                      </td>
+                      <td>
+                        {{record.confirm_date}}
+                      </td>
+                      <td>
+                        <img src="{{record.car.photo.url}}" class="rounded" width="100" alt="Image">
+                      </td>
+                  </tr>
+                  {% endfor %}
+                {% endfor %}
+              </tbody>
+          </table>
+
+         
+        </table>
+          </div>
+            
+        </div>
+
+    </div>
+
+{% endblock %}
